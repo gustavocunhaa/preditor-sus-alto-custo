@@ -11,23 +11,24 @@ São pacientes que, por conta da sua alta complexidade do estádo de saúde asso
 É estimado que as principais doenças crônicas no Brasil geraram um custo de R$3,45
 bilhões ao SUS no ano de 2018, onde desse total, 59% foram investidos no tratamento da
 hipertensão, 30% na diabetes e 11% no tratamento da obesidade. [Nilson EAF
-et.al (2018)]
+et.al (2018)](https://doi.org/10.26633/RPSP.2020.32)
 
 Nesse contexto, além do alto custo para realização do tratamento, pacientes crônicos
-possuem baixa adesão ao tratamento farmacológico, onde a prevalência da baixa adesão ao tratamento farmacológico de doenças crônicas foi de 30,8%. A complexidade do tratamento, associada ao alto custo, gera complicações no tratamento e piora da qualidade de vida da população. [Tavares et.al (2016)]
+possuem baixa adesão ao tratamento farmacológico, onde a prevalência da baixa adesão ao tratamento farmacológico de doenças crônicas foi de 30,8%. A complexidade do tratamento, associada ao alto custo, gera complicações no tratamento e piora da qualidade de vida da população. [Tavares et.al (2016)](https://www.scielo.br/j/rsp/a/R8pG5F3d3Qwx5Xz7dt6K6nx/?format=pdf)
 
 Portanto, prever a probabilidade de um indivíduo se tornar um paciente de alto custo hospitalar no futuro também é poder ser ativo no cuidado de pacientes crônicos
 
 ### Arquitetura do projeto
 
+![arquitetura](docs/[GitHub]%20Arch%20-%20alto%20custo%20sus.jpg)
 
-### Referências
+1. Pipeline de ELT: 
+     - Extração realizada com utilização da biblioteca do [PySUS](https://github.com/AlertaDengue/PySUS) e os dados brutos extraídos são salvos no AWS s3.
+     - É utilizado o PySpark transformações e finalmente o novo dado é salvo no AWS DynamoDB.
 
-- Nilson EAF, Andrade RCS, Brito DA, Oliveira ML. Custos atribuíveis à obesidade,
-hipertensão e diabetes no Sistema Único de Saúde, Brasil, 2018. Rev Panam Salud Publica.
-2020; 44:32. Disponível em: <https://doi.org/10.26633/RPSP.2020.32>.
+2. Pipeline de Machine Learning:
+     - O MLFlow foi utilizado para ser o arcabouço de treinamento, registro e deploy dos modelos que forem treinados. 
+     - Todo o acompanhamento das métricas e parte do ciclo de MLOps serão visualizadas na interface do MLFlow.
 
-- Tavares NUL, Bertoldi AD, Mengue SS, Arrais PSD, Luiza VL, Oliveira MA, et al. Fatores
-associados à baixa adesão ao tratamento farmacológico de doenças crônicas no Brasil. Rev
-Saúde Pública. 2016;50(supl 2): 10. Disponível em:
-<https://www.scielo.br/j/rsp/a/R8pG5F3d3Qwx5Xz7dt6K6nx/?format=pdf & lang=pt>.
+3. Deploy:
+     - Criação da imagem Docker utilizando o Render para disponibilizar o webserver tanto do Airflow quanto do MLFlow.
