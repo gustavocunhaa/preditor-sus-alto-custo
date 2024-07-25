@@ -29,6 +29,3 @@ Portanto, prever a probabilidade de um indivíduo se tornar um paciente de alto 
 2. Pipeline de Machine Learning:
      - O MLFlow foi utilizado para ser o arcabouço de treinamento, registro e deploy dos modelos que forem treinados. 
      - Todo o acompanhamento das métricas e parte do ciclo de MLOps serão visualizadas na interface do MLFlow.
-
-3. Deploy:
-     - Criação da imagem Docker utilizando o Render para disponibilizar o webserver tanto do Airflow quanto do MLFlow.
