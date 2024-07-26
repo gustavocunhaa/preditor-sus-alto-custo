@@ -1,0 +1,17 @@
+FROM python:3.10
+
+ARG AWS_ID
+ARG AWS_KEY_ID
+
+ENV AWS_ID=$AWS_ID
+ENV AWS_KEY_ID=$AWS_KEY_ID
+
+COPY requirements.pysus.txt requirements.txt
+RUN pip3 install --upgrade pip
+RUN pip3 install --upgrade pip setuptools wheel
+RUN pip install -r requirements.txt
+
+COPY src/pipe/ /app/
+WORKDIR /app
+
+ENTRYPOINT [ "python", "collect.py" ]
