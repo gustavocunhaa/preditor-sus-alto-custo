@@ -27,5 +27,6 @@ Portanto, prever a probabilidade de um indivíduo se tornar um paciente de alto 
      - É utilizado o PySpark transformações e finalmente o novo dado é salvo no AWS DynamoDB.
 
 2. Pipeline de Machine Learning:
-     - O MLFlow foi utilizado para ser o arcabouço de treinamento, registro e deploy dos modelos que forem treinados. 
-     - Todo o acompanhamento das métricas e parte do ciclo de MLOps serão visualizadas na interface do MLFlow.
+     - O modelo é treinado com a chegada de novos dados.
+     - O seu registro é feito no S3, salvando tanto o modelo serializado quanto metadados.
+     - Todo novo dado dispara o ciclo de MLOps fazendo a inferência das métricas do modelo para os novos dados. Caso o modelo não esteja nos limites estabelecidos pelos testes, um novo modelo é treinado e substituido.
