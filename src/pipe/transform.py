@@ -1,5 +1,6 @@
 import os
-from pyspark.sql import functions
+import argparse
+from pyspark.sql import SparkSession, functions
 
 import config
 from save import save_parquet
@@ -43,3 +44,19 @@ def transform_dataframe_alto_custo(spark, estado:str, ano:str, mes:int):
     save_path = f"{config.s3_bucket}/transform/estado={estado}/ano={ano}/mes={mes}/sih_transform_data.parquet" 
 
     return save_parquet(df.toPandas(), save_path)
+
+if __name__ == '__main__':
+    
+    spark = SparkSession\
+        .builder\
+        .appName("datasus_transformation")\
+        .getOrCreate()
+    
+    parser = argparse.ArgumentParser(description="Spark DataSUS Transformation")
+    parser.add_argument("--estado", required=True)
+    parser.add_argument("--ano", required=True)
+    parser.add_argument("--mes", required=True)
+
+    args = parser.parse_args()
+
+    transform_dataframe_alto_custo(spark, args.estado, args.ano, args.mes)
