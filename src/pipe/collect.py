@@ -1,27 +1,31 @@
 import os
 import argparse
 from pathlib import Path
+
+import boto3
 from pysus.online_data.SIH import download
 
 from config import s3_bucket
 from save import save_parquet
 
-ROOT_PATH = os.getcwd()
-
 def extracao_dados_sih(estado: str, ano: str, mes: int):
   
+  session = boto3.Session(aws_access_key_id=os.getenv("AWS_ID"), 
+                          aws_secret_access_key=os.getenv("AWS_KEY_ID"), 
+                          region_name='us-east-1')  
+
   dados = download(states=estado,
                    years=ano, 
                    months=mes, 
                    groups='RD', 
-                   data_dir=Path(f"{ROOT_PATH}/data")
+                   data_dir=Path(f"{os.getcwd()}/data")
                    )
   
   print(f"Dados de {estado}, de {mes}/{ano}, baixados")
   save_path = f"{s3_bucket}/raw/estado={estado}/ano={ano}/mes={mes}/sih_raw_data.parquet"
   df = dados.to_dataframe()
   
-  return save_parquet(df, save_path) 
+  return save_parquet(df, save_path, session)
 
 
 if __name__ == '__main__':
