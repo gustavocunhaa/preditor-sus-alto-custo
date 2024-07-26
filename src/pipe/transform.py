@@ -1,8 +1,17 @@
+import os
 from pyspark.sql import functions
+
 import config
+from save import save_parquet
 
+ROOT_PATH = os.getcwd()
 
-def transform_dataframe_alto_custo(df):
+def transform_dataframe_alto_custo(spark, estado:str, ano:str, mes:int):
+    if mes < 10:
+        mes = f"0{mes}"
+
+    df = spark.read.parquet(f"{ROOT_PATH}/data/RD{estado.upper()}{ano[-2:]}{mes}.parquet")
+
     df = df.where("MORTE == 0")
     df = df.withColumn("DIAG_PRINC",functions.expr("substring(DIAG_PRINC, 1, length(DIAG_PRINC) - 1)"))
 
@@ -31,5 +40,6 @@ def transform_dataframe_alto_custo(df):
                         )
     
     df = df.na.drop(subset=["DIAG_CLASS"])
-    
-    return df
+    save_path = f"{config.s3_bucket}/transform/estado={estado}/ano={ano}/mes={mes}/sih_transform_data.parquet" 
+
+    return save_parquet(df, save_path)
