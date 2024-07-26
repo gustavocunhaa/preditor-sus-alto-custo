@@ -1,4 +1,4 @@
-s3_bucket = 's3://datalake-data-sus/'
+s3_bucket = 's3://datalake-data-sus'
 
 filter_columns = [
     'ANO_CMPT',
