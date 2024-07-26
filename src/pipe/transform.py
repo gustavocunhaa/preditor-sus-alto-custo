@@ -42,4 +42,4 @@ def transform_dataframe_alto_custo(spark, estado:str, ano:str, mes:int):
     df = df.na.drop(subset=["DIAG_CLASS"])
     save_path = f"{config.s3_bucket}/transform/estado={estado}/ano={ano}/mes={mes}/sih_transform_data.parquet" 
 
-    return save_parquet(df, save_path)
+    return save_parquet(df.toPandas(), save_path)
