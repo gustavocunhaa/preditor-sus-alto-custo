@@ -24,7 +24,8 @@ Portanto, prever a probabilidade de um indivíduo se tornar um paciente de alto 
 
 1. Pipeline de ELT: 
      - Extração realizada com utilização da biblioteca do [PySUS](https://github.com/AlertaDengue/PySUS) e os dados brutos extraídos são salvos no AWS s3.
-     - É utilizado o PySpark transformações e finalmente o novo dado é salvo no AWS DynamoDB.
+     - O método de extração é contido em uma imagem Docker, para cumprir requisitos de compatibilidade de versão do python. 
+     - É utilizado o PySpark transformações e o novo dado é salvo em outro local do s3.
 
 2. Pipeline de Machine Learning:
      - O modelo é treinado com a chegada de novos dados.
