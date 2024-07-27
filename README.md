@@ -31,3 +31,27 @@ Portanto, prever a probabilidade de um indivíduo se tornar um paciente de alto 
      - O modelo é treinado com a chegada de novos dados.
      - O seu registro é feito no S3, salvando tanto o modelo serializado quanto metadados.
      - Todo novo dado dispara o ciclo de MLOps fazendo a inferência das métricas do modelo para os novos dados. Caso o modelo não esteja nos limites estabelecidos pelos testes, um novo modelo é treinado e substituido.
+
+### Orquestração
+
+Todo o projeto é orquestrado pelo Airflow. No caso do projeto, ele foi instalado localmente utilizando o runtime do python em 3.9.
+
+> É recomendado criar um venv isolado para projeto.
+
+No ambiente virtual já ativado:
+
+```bash
+pip install 'apache-airflow==2.3.2' --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.3.2/constraints-3.9.txt"
+```
+```bash
+pip install -r requirements.airflow.txt # Para outros modulos e pacotes
+```
+
+Para execução:
+```bash
+export AIRFLOW_HOME=$(pwd)/airflow_pipeline
+```
+
+```bash
+airflow standalone
+```
