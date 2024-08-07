@@ -2,6 +2,10 @@
 
 Projeto que coleta dados do SIH (Sistema de informações hospitalares) para classificar quais pacientes são de "Alto custo".
 
+Esse projeto foi utilizado como tese de conclusão de curso para o MBA em Data Science and Analytics da USP/Esalq.
+
+> [Notebook](docs/preditor_altoCusto.ipynb) que foi produtizado.
+
 ### O que é Alto Custo?
 
 São pacientes que, por conta da sua alta complexidade do estádo de saúde associada a condições crônicas e tratamento complexos, utilizam grande parte dos recursos financeiros de um serviço de saúde. A problemática não fica na questão financeira, mas sim no que esse valor representa como reflexo da qualidade de vída daquele paciente.
@@ -30,7 +34,7 @@ Portanto, prever a probabilidade de um indivíduo se tornar um paciente de alto 
 2. Pipeline de Machine Learning:
      - O modelo é treinado com a chegada de novos dados.
      - O seu registro é feito no S3, salvando tanto o modelo serializado quanto metadados.
-     - Todo novo dado dispara o ciclo de MLOps fazendo a inferência das métricas do modelo para os novos dados. Caso o modelo não esteja nos limites estabelecidos pelos testes, um novo modelo é treinado e substituido.
+     - Todo novo dado dispara o ciclo de MLOps fazendo a inferência das métricas do modelo para os novos dados.
 
 ### Orquestração
 
