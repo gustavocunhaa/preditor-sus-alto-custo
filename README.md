@@ -24,7 +24,7 @@ Portanto, prever a probabilidade de um indivíduo se tornar um paciente de alto 
 
 ### Arquitetura do projeto
 
-![arquitetura](docs/[GitHub]%20Arch%20-%20alto%20custo%20sus.jpg)
+![arquitetura](docs/[GitHub]%20Arch%20-%20alto%20custo%20sus.png)
 
 1. Pipeline de ELT: 
      - Extração realizada com utilização da biblioteca do [PySUS](https://github.com/AlertaDengue/PySUS) e os dados brutos extraídos são salvos no AWS s3.
