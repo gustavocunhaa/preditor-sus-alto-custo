@@ -53,10 +53,17 @@ if __name__ == '__main__':
         .getOrCreate()
     
     parser = argparse.ArgumentParser(description="Spark DataSUS Transformation")
-    parser.add_argument("--estado", required=True)
     parser.add_argument("--ano", required=True)
     parser.add_argument("--mes", required=True)
-
     args = parser.parse_args()
+    
+    siglas_estados_brasil = [
+      'ac', 'ap', 'am', 'pa', 'ro', 'rr', 'to',  # Norte
+      'al', 'ba', 'ce', 'ma', 'pb', 'pe', 'pi', 'rn', 'se',  # Nordeste
+      'df', 'go', 'mt', 'ms',  # Centro-Oeste
+      'es', 'mg', 'rj', 'sp',  # Sudeste
+      'pr', 'rs', 'sc'  # Sul
+      ]
 
-    transform_dataframe_alto_custo(spark, args.estado, args.ano, args.mes)
+    for estado in siglas_estados_brasil:
+        transform_dataframe_alto_custo(spark, estado, args.ano, args.mes)
