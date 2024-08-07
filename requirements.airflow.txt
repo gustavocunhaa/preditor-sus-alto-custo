@@ -3,3 +3,5 @@ pyspark==3.3.1
 apache-airflow==2.3.2
 apache-airflow-providers-apache-spark==4.0.0
 apache-airflow-providers-docker==3.6.0
+scikit-learn==1.5.1
+imbalanced-learn==0.12.3
