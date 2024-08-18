@@ -6,6 +6,17 @@ Esse projeto foi utilizado como tese de conclusão de curso para o MBA em Data S
 
 > [Notebook](docs/preditor_altoCusto.ipynb) que foi produtizado.
 
+<div style="display: inline_block"><br>
+  <img align="center" alt="python" height="50" width="60" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg">
+  <img align="center" alt="pysus" height="50" width="60" src="https://avatars.githubusercontent.com/u/17177635?s=48&v=4">
+  <img align="center" alt="pyspark" height="50" width="60" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apachespark/apachespark-original-wordmark.svg">
+  <img align="center" alt="aws" height="50" width="60" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg">
+  <img align="center" alt="s3" height="50" width="60" src="https://cdn.worldvectorlogo.com/logos/amazon-s3-simple-storage-service.svg">
+  <img align="center" alt="airflow" height="50" width="60" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apacheairflow/apacheairflow-original.svg">
+  <img algin="center" alt="docker" height="50" width="60" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original-wordmark.svg">
+  <img align="center" alt="sklearn" height="50" width="60" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/scikitlearn/scikitlearn-original.svg"> 
+</div>       
+
 ### O que é Alto Custo?
 
 São pacientes que, por conta da sua alta complexidade do estádo de saúde associada a condições crônicas e tratamento complexos, utilizam grande parte dos recursos financeiros de um serviço de saúde. A problemática não fica na questão financeira, mas sim no que esse valor representa como reflexo da qualidade de vída daquele paciente.
