@@ -20,9 +20,8 @@ def load_data(s3_transform_path):
     y = df['ALTO_CUSTO']
     return x, y
 
-def norm_data(data):
-    scaler = MinMaxScaler()
-    data_norm = scaler.fit_transform(data)
+def norm_data(data, scaler):
+    data_norm = scaler.transform(data)
     colunas = data.columns
     df = pd.DataFrame(data_norm, columns=colunas)
     return df
@@ -33,7 +32,7 @@ def make_ohe(data):
     df = pd.DataFrame(data_ohe, columns=ohe.get_feature_names_out(data.columns))
     return df
 
-def transform_features(x):
+def transform_features(x, scaler):
     dict_features = config.features
     df_transform_num = pd.DataFrame()
     df_transform_str = pd.DataFrame()
@@ -41,7 +40,7 @@ def transform_features(x):
         dtype = dict_features[col]
         x[col] = x[col].astype(dtype)
         if dtype in ('float', 'int'):
-            num = norm_data(x[[col]])
+            num = norm_data(x[[col]], scaler)
             df_transform_num = pd.concat([df_transform_num, num], axis=1)
         elif dtype in ('str'):
             dummy = make_ohe(x[[col]])
@@ -54,11 +53,11 @@ def split_data(x, y, test_size):
     try:
         X_train, X_test, y_train, y_test = train_test_split(x, y, 
                                                             random_state=config.SEED, 
-                                                            test_size=test_size)
+                                                            test_size=test_size)        
         print(f"SUCESS: Slipt Data")
     except ValueError as e:
         print(f"ERROR: Slipt Data - {e}")
-    return X_train, X_test, y_train, y_test 
+    return X_train, X_test, y_train, y_test
 
 def balance_target(X_train, y_train):
     rus = RandomUnderSampler(random_state = config.SEED)
@@ -92,11 +91,13 @@ def evaluate(prob_predict, predictions, y_test):
 
 if __name__ == '__main__':
     x, y = load_data(config.transform_s3_path)
-    x = transform_features(x)
-    
     X_train, X_test, y_train, y_test = split_data(x, y, config.test_size)
     x_rus, y_rus = balance_target(X_train, y_train)
     
+    scaler = MinMaxScaler((0, 1)).fit(x_rus)
+    x_rus = transform_features(x_rus, scaler)
+    X_test = transform_features(X_test, scaler)
+
     model_fit = train_model(config.model, x_rus, y_rus)
     prob_predict, predcit = score(model_fit, config.threshold, X_test)
     results = evaluate(prob_predict, predcit, y_test)
